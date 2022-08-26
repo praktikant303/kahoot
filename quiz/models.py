@@ -48,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     activation_code = models.CharField(max_length=50, blank=True)
     quizzes_and_answers = models.JSONField(default=dict, null=True, blank=True)
 
+
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"

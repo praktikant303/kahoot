@@ -156,12 +156,6 @@ class GroupByUserAPIView(generics.ListAPIView):
 
     def get(self, request):
         results = Group.objects.filter(user=request.user)
-        for i in results:
-            print(i, type(i))
-            print(i.id, type(i.id))
-            print(str(i), type(str(i)))
-        print(results)
-        print(type(results))
         serializer = GroupSerializer(results, many=True)
         print(request.user.replied_questions_and_scores)
         return Response(serializer.data)
@@ -197,21 +191,6 @@ class GetValidQuestionsAPIView(generics.CreateAPIView):
         time_answer = request.data.get('answer_time')
         logic(request, answer, time_answer, question_id)
         return Response('Your answer has been submitted')
-
-
-# class SearchByParamsListView(viewsets.ModelViewSet):
-#
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     http_method_names = ['get']
-#
-#     @action(detail=True, method=['get'])
-#     def search(self, request, pk=None):
-#         q = request.query_params.get('q')
-#         queryset = self.get_queryset()
-#         queryset = queryset.filter(Q(name__icontains=q))
-#         serializer = UserSerializer(queryset, many=True)
-#         return Response(serializer.data)
 
 
 
